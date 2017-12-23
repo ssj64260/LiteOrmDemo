@@ -19,8 +19,12 @@ public class LiteOrmHelper {
 
     private LiteOrm liteOrm;
 
-    public LiteOrmHelper(Context context) {
-        liteOrm = LiteOrm.newSingleInstance(context, DB_NAME);
+    public LiteOrmHelper(Context context, boolean isSingle) {
+        if (isSingle) {
+            liteOrm = LiteOrm.newSingleInstance(context, DB_NAME);
+        } else {
+            liteOrm = LiteOrm.newCascadeInstance(context, DB_NAME);
+        }
         liteOrm.setDebugged(DEBUGGABLE);
     }
 
